@@ -10,7 +10,7 @@ public:
 
 	void build_branch();
 private:
-
+	std::vector<dir> m_dir_list;
 };
 
 void branch::build_branch() {

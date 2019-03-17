@@ -1,19 +1,21 @@
 #ifndef DIR_HPP
 #define DIR_HPP
 
-#include "command/command.hpp"
+#include <command/command.hpp>
 #include <string>
 
 class dir {
 
 public:
-    dir();  // ctor
+    dir() { has_children_dirs = false; };  // ctor
     ~dir() {} // dtor
 
     std::string get_cwd() { return m_cwd;}
     std::string get_parent_dir() { return m_parent_dir; }
     std::vector<std::string>get_dirs();
     std::vector<std::string>get_files();
+
+    void set_cwd(std::string cwd) { m_cwd = cwd; }
 
     int get_branch_level() { return m_branch_level;}
     int get_node_num() { return m_node_level; }
@@ -35,20 +37,6 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-dir::dir() {
-    has_children_dirs = false;
-    std::vector<std::string>terminal_feedback;
-    std::vector<std::string>error_list;
-    _cmd.exec("pwd", terminal_feedback, error_list);
-    for (int i = 0; i < terminal_feedback.size(); i++) {
-        std::string temp = terminal_feedback[i];
-        if (temp[0] == '/')
-            m_cwd = temp;
-    }
-    if (m_cwd.size() < 1)
-        std::cout << "I don't think we got a good read on current working dir." << std::endl;
-}
-
 void dir::classify_objects_in_dir(std::string working_dir) {
     std::vector<std::string> terminal_feedback;
     std::vector<std::string> error_list;
@@ -68,10 +56,10 @@ void dir::classify_objects_in_dir(std::string working_dir) {
             std::cout << temp << std::endl;
         }
     }
-    if (m_dirs.size() > 0)
-        fix_dirs(_dir_list);
-    else
+    if (m_dirs.size() > 0) {
         has_children_dirs = true;
+        fix_dirs(_dir_list);
+    }
     if (m_files.size() > 0)
         fix_files(_file_list);
 }
@@ -109,8 +97,6 @@ void dir::fix_files(std::vector<std::string> _file_list) {
             std::string pruned_file = cur_file.substr(begin_pos, end_pos);
             std::cout << "Found a potential file: " << std::endl << "[" << pruned_file << "]" << std::endl;
             m_files.push_back(pruned_file);
-        }
-    }
-}
+}   }   }
 
 #endif
