@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "../command/command.hpp"
+#include "../../command/command.hpp"
 
 using std::cout;
 using std::endl;
