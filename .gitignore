@@ -33,3 +33,6 @@
 
 # Ignore specific files
 test_env_creator/create_test_env
+
+# Ignore other git repos pulled into this
+command/*
