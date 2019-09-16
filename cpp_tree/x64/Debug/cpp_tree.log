@@ -1,0 +1,5 @@
+﻿  dir_obj.cpp
+c:\users\gray fox\documents\visual studio 2017\projects\cpp_tree\cpp_tree\word_list.h(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gray fox\documents\visual studio 2017\projects\cpp_tree\cpp_tree\word_list.h(30): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gray fox\documents\visual studio 2017\projects\cpp_tree\cpp_tree\dir_obj.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  cpp_tree.vcxproj -> C:\Users\gray fox\Documents\Visual Studio 2017\projects\cpp_tree\x64\Debug\cpp_tree.exe
