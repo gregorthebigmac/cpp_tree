@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "dir_obj.h"
 #include "file_obj.h"
-#include <Windows.h>
 
 // constructor
 dir_obj::dir_obj(dir_obj *parent_dir, int depth) {
@@ -37,7 +36,6 @@ void dir_obj::populate_dir() {
 			//else std::cout << "Reached level 10. Not creating a new dir." << std::endl;
 		}
 		else std::cout << "dir_obj::populate_dir - ERROR: _bit != 0,1" << std::endl;
-		Sleep(100);
 	}
 }
 
