@@ -6,26 +6,26 @@ class file_obj;
 
 class dir_obj {
 public:
-	dir_obj(dir_obj *parent_dir);
+	dir_obj(dir_obj *parent_dir, int depth);
 	~dir_obj();
-	
+
 	// getters
 	std::string get_dirname() { return m_dirname; }
 	std::string get_path_to_dir() { return m_path_to_dir; }
 	std::vector<file_obj*> get_file_objs_refs() { return m_file_ref_list; }
 	word_list *get_word_list_ref() { return m_word_list; }
-	
+	std::string get_parent_dirname() { return m_parent_dir->get_dirname(); }
+
 	// setters
-	void set_dirname();
-	
+	void set_dirname() { m_dirname = m_word_list->get_random_word(); }
+
 	void populate_dir();
-	
+
 	// debug methods
 	void dump_dir_contents();
-	
+
 private:
-	std::string create_filename();
-	
+	int m_depth;
 	std::string m_dirname;
 	std::string m_path_to_dir;
 	dir_obj *m_parent_dir;

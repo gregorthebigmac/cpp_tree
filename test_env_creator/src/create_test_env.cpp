@@ -7,7 +7,7 @@ using std::string;
 using std::vector;
 
 command cmd;
-dir_obj root(NULL);
+dir_obj root(NULL, 0);
 
 int main() {
 	srand(time(NULL));
