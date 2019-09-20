@@ -6,14 +6,13 @@ using std::endl;
 using std::string;
 using std::vector;
 
-//command cmd;
+command cmd;
 
-//dir_obj root(NULL, 0);
 
 int main() {
-	//srand(time(NULL));
-	//root.dump_dir_contents();
-	word_list wrd;
-	wrd.randomize_words();
+	srand(time(NULL));
+	unsigned int rand_seed = rand();
+	dir_obj root(NULL, 0, rand_seed);
+	root.dump_dir_contents();
 	return 0;
 }

@@ -11,6 +11,7 @@
 class word_list {
 public:
 	word_list() {
+		m_word_iterator = 0;
 		srand(time(NULL));
 		std::string _filename;
 		std::ifstream fin;
@@ -35,8 +36,13 @@ public:
 		//if (_rand_word != "")
 			//return _rand_word;
 		//else return "bad_filename";
-		std::string _temp_word = m_word_list[m_word_list.size()];
-		m_word_list.pop_back();
+		if (m_word_iterator >= m_word_list.size())
+			m_word_iterator = 0;
+		std::string _temp_word = m_word_list[m_word_iterator];
+		m_word_iterator++;
+		if ((_temp_word != "") || (_temp_word != " "))
+			return _temp_word;
+		else return "bad_word";
 	}
 
 	void randomize_words() {
@@ -62,5 +68,6 @@ public:
 	}	
 private:
 	std::vector<std::string> m_word_list;
+	int m_word_iterator;
 };
 #endif

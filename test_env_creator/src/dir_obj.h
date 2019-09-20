@@ -6,7 +6,7 @@ class file_obj;
 
 class dir_obj {
 public:
-	dir_obj(dir_obj *parent_dir, int depth);
+	dir_obj(dir_obj *parent_dir, int depth, unsigned int rand_seed);
 	~dir_obj();
 
 	// getters
@@ -25,6 +25,7 @@ public:
 	void dump_dir_contents();
 
 private:
+	unsigned int m_rand_seed;
 	int m_depth;
 	std::string m_dirname;
 	std::string m_path_to_dir;

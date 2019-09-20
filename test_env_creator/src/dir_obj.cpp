@@ -2,7 +2,8 @@
 #include "file_obj.h"
 
 // constructor
-dir_obj::dir_obj(dir_obj *parent_dir, int depth) {
+dir_obj::dir_obj(dir_obj *parent_dir, int depth, unsigned int rand_seed) {
+	m_rand_seed = rand_seed;
 	if (parent_dir != NULL) {
 		m_word_list = parent_dir->get_word_list_ref();
 		set_dirname();
@@ -18,23 +19,24 @@ dir_obj::dir_obj(dir_obj *parent_dir, int depth) {
 dir_obj::~dir_obj() {} // destructor
 
 void dir_obj::populate_dir() {
-	srand(time(NULL));
-	int number_of_child_objects = (rand() % 15) + 5;
-	for (int i = 0; i < number_of_child_objects; i++) {
-		bool _bit = rand() % 2;
-		if (_bit == 0) {
-			file_obj *temp_file = new file_obj(this);
-			m_file_ref_list.push_back(temp_file);
-			temp_file->set_filename(m_word_list->get_random_word());
+	srand(m_rand_seed);
+	m_rand_seed = rand();
+	int number_of_child_dirs = (rand() % 5) + 2;
+	srand(m_rand_seed);
+	m_rand_seed = rand();
+	int number_of_child_files = (rand() % 5) + 2;
+	for (int i = 0; i < number_of_child_dirs; i++) {
+		if (m_depth < 5) {
+			dir_obj *temp_dir = new dir_obj(this, m_depth, m_rand_seed);
+			m_dir_ref_list.push_back(temp_dir);
 		}
-		else if (_bit == 1) {
-			if (m_depth < 10) {
-				dir_obj *temp_dir = new dir_obj(this, m_depth);
-				m_dir_ref_list.push_back(temp_dir);
-			}
-			//else std::cout << "Reached level 10. Not creating a new dir." << std::endl;
+	}
+	for (int i = 0; i < number_of_child_files; i++) {
+		if (m_depth < 5) {
+		file_obj *temp_file = new file_obj(this);
+		m_file_ref_list.push_back(temp_file);
+		temp_file->set_filename(m_word_list->get_random_word());
 		}
-		else std::cout << "dir_obj::populate_dir - ERROR: _bit != 0,1" << std::endl;
 	}
 }
 
@@ -53,6 +55,9 @@ void dir_obj::dump_dir_contents() {
 		std::cout << "File " << i << ": " << m_file_ref_list[i]->get_filename() << std::endl;
 	}
 	std::cout << "Child Directories:" << std::endl;
+	for (int i = 0; i < m_dir_ref_list.size(); i++) {
+		std::cout << m_dir_ref_list[i]->get_dirname() << std::endl;
+	}
 	for (int i = 0; i < m_dir_ref_list.size(); i++) {
 		m_dir_ref_list[i]->dump_dir_contents();
 	}
