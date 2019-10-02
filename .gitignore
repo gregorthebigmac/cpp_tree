@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Do not include command lib in commits
+command/*
+
+# Do not include .vscode/ or any of its contents
+.vscode/*
