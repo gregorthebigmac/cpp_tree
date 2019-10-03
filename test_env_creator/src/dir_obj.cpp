@@ -1,16 +1,24 @@
 #include "dir_obj.h"
 #include "file_obj.h"
+#include "../../command/command.hpp"
 
 // constructor
 dir_obj::dir_obj(dir_obj *parent_dir, int depth, unsigned int rand_seed) {
+	m_job_done = false;
 	m_rand_seed = rand_seed;
 	if (parent_dir != NULL) {
 		m_word_list = parent_dir->get_word_list_ref();
+		m_path_to_dir = "/" + parent_dir->get_path_to_dir();
 		set_dirname();
 	}
 	else {
 		m_word_list = new word_list;
-		m_dirname = "ROOT";
+		std::vector<std::string> working_dir, error_list;
+		command cmd;
+		cmd.exec("pwd", working_dir, error_list);
+		m_path_to_dir = working_dir[0] + "/";
+		m_dirname = m_word_list->get_random_word();
+		m_path_to_dir = m_path_to_dir + m_dirname;
 	}
 	m_depth = ++depth;
 	m_parent_dir = parent_dir;
@@ -41,7 +49,6 @@ void dir_obj::populate_dir() {
 }
 
 // private methods
-
 
 // debug methods
 void dir_obj::dump_dir_contents() {

@@ -1,5 +1,5 @@
-#include "../../command/command.hpp"
 #include "dir_obj.h"
+#include "../../command/command.hpp"
 
 using std::cout;
 using std::endl;
@@ -7,7 +7,6 @@ using std::string;
 using std::vector;
 
 command cmd;
-
 
 int main() {
 	srand(time(NULL));

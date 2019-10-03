@@ -25,6 +25,7 @@ public:
 	void dump_dir_contents();
 
 private:
+	bool m_job_done;
 	unsigned int m_rand_seed;
 	int m_depth;
 	std::string m_dirname;
